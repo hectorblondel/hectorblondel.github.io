@@ -1,0 +1,95 @@
+/* CSS HEX */
+:root{
+    --orchid-pink: #d4afb9ff;
+    --lavender-web: #d1cfe2ff;
+    --powder-blue: #9cadceff;
+    --sky-blue: #7ec4cfff;
+    --moonstone: #52b2cfff;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--lavender-web);
+    text-align: center;
+    color: #333;
+}
+.container {
+    width: 90%;
+    max-width: 1800px;
+    margin: 10px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: left;
+}
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    object-fit: cover;
+}
+h1 {
+    color: black;
+    font-size: 2em;
+    margin-bottom: 10px;  
+    margin-left: 120px;
+}
+.subtitle {
+    font-size: 1.2em;
+    color: var(--moonstone);
+    margin-bottom: 20px;
+    margin-left: 120px;
+}
+.contact {
+    margin-left: 120px;
+}
+.contact a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--sky-blue);
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+.contact a:hover {
+    background-color: var(--moonstone);
+}
+.section {
+    text-align: left;
+    margin-top: 30px;
+}
+.section h2 {
+    border-bottom: 3px solid var(--orchid-pink);
+    padding-bottom: 5px;
+    font-size: 1.5em;
+    color : var(--orchid-pink)
+}   
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+ul li {
+    margin: 20px 0;
+    font-size: 1.1em;
+}
+
+/* SCSS Gradient */
+/* $gradient-top: linear-gradient(0deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-right: linear-gradient(90deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-bottom: linear-gradient(180deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-left: linear-gradient(270deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-top-right: linear-gradient(45deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-bottom-right: linear-gradient(135deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-top-left: linear-gradient(225deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-bottom-left: linear-gradient(315deg, #d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff);
+$gradient-radial: radial-gradient(#d4afb9ff, #d1cfe2ff, #9cadceff, #7ec4cfff, #52b2cfff); */

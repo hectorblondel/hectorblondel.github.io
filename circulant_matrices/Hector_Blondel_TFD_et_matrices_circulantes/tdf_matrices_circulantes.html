@@ -1,0 +1,539 @@
+<div class="center">
+<div class="tabular">
+<p><span>p<span>0.9</span></span><br />
+<strong>Fiche Identité:</strong></p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Discipline</th>
+<th style="text-align: left;">Mathématiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Auteur</td>
+<td style="text-align: left;">Hector Blondel</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Année</td>
+<td style="text-align: left;">2024-2025</td>    
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cours concerné</td>
+<td style="text-align: left;">Traitement du signal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Relu par</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br />
+</p>
+</div>
+</div>
+<div class="center">
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><strong>Résumé:</strong></p>
+<p>La transformée de Fourier discrète se définit naturellement et hérite
+de propriétés similaires à celles de la transformée de Fourier
+classique. Elle peut-être vue comme une opération linéaire (et donc
+ayant sa matrice associée). Le formalisme matriciel permet de retrouver
+beaucoup de propriétés de la transformée de Fourier discrète, comme le
+théorème de convolution (la transformée de Fourier de la convolution
+circulaire de deux vecteurs est également le produit terme-à-terme des
+transformées de Fourier de ces deux vecteurs)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Mots-clés</strong> : Traitement
+numérique du signal, Transformée de Fourier, convolution circulaire,
+matrice circulante</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 class="unnumbered" id="introduction">Introduction</h1>
+<p>Que ce soit pour l’analyse de signaux temporels, ou en
+télécommunications pour a transmission d’information ou , la
+transformation de Fourier est omniprésente dans la plupart des
+applications d’ingénieurie. Bien que notre monde soit physique et
+continu, l’ingénieur doit se résilier à manipuler informatiquement des
+signaux à durée fini et à temps discret. La transformée de Fourier
+discrète est alors nécessaire.</p>
+<p>Nous nous proposons ici d’introduire la transformée de Fourier
+discrète, sous un angle matriciel, en compléménet du cours de première
+année de traitement du signal de Centrale-Supélec. Cet angle permettra
+au lecteur de visulaliser plus facilement ce qui se passe, et de pouvoir
+vérifier ou redémontrer facilement les propriétés.</p>
+<div class="notations">
+<p><strong>Notations 1</strong>. <em>Soit <span
+class="math inline"><em>N</em> ∈ ℕ</span>. Nous notons <span
+class="math inline">ℳ<sub><em>n</em></sub>(ℂ)</span> l’ensemble des
+matrices carrées de taille <span class="math inline"><em>N</em></span> à
+coefficients dans <span class="math inline">ℂ</span>. Les coefficients
+des matrices seront indicés de <span class="math inline">0</span> à
+<span class="math inline"><em>N</em> − 1</span> : <span
+class="math inline">∀(<em>i</em>,<em>j</em>) ∈ [ [0,<em>N</em>−1] ]<sup>2</sup></span>,
+<span
+class="math inline">[<em>M</em>]<sub><em>i</em>, <em>j</em></sub></span>
+désigne le coefficient <span
+class="math inline"><em>i</em>, <em>j</em></span> de <span
+class="math inline"><em>M</em> ∈ ℳ<sub><em>n</em></sub>(ℂ)</span> et
+<span class="math inline"><em>x</em><sub><em>i</em></sub></span> désigne
+le coefficient <span class="math inline"><em>i</em></span> du vecteur
+<span
+class="math inline"><em>x</em> ∈ ℂ<sup><em>N</em></sup></span>.</em></p>
+</div>
+<h1 id="matrices-circulantes">Matrices circulantes</h1>
+<div class="tcolorbox">
+<p>L’application <span class="math display">$$C : \begin{cases}
+\mathbb{C}^N \to \mathcal{M}_N(\mathbb{C})  \\
+x = (x_0, \ldots, x_{N-1}) \mapsto
+\begin{bmatrix}
+x_0 &amp; x_1 &amp; \cdots &amp; x_{N-1} \\
+x_{N-1} &amp; x_0 &amp; \cdots &amp; x_{N-2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_1 &amp; x_2 &amp; \cdots &amp; x_0 \\
+\end{bmatrix}
+\end{cases}$$</span> est un morphisme de groupe de <span
+class="math inline">(ℂ<sup><em>N</em></sup>;+)</span> vers <span
+class="math inline">(ℳ<sub><em>N</em></sub>(ℂ),+)</span></p>
+<p>Nous appelons "matrices circulantes" l’image de C.</p>
+</div>
+<p>Par la suite, nous noterons <span class="math inline">𝒞</span>
+l’ensemble des matrices circulantes.</p>
+<p>Les matrices circulantes permettent de représenter algébriquement
+l’opération de convolution circulaire.</p>
+<div class="definition">
+<p><strong>Définition 2</strong>. <em><span>convolution
+circulaire</span> Soient <span
+class="math inline"><em>x</em>, <em>y</em> ∈ ℂ<sup><em>N</em></sup></span>
+deux vecteurs complexes. Le produit de convolution circulaire est le
+vecteur de <span class="math inline">ℂ<sup><em>N</em></sup></span> dont
+les coefficients sont :</em></p>
+<p><em><span class="math display">$$(x \circledast y)_m =
+\sum_{n=0}^{N-1} x_{m-n \mod N} y_{n}$$</span></em></p>
+<p><em>L’opérateur C défini plus haut nous permet d’exprimer facilement
+cette opération :</em></p>
+<p><em><span
+class="math display"><em>x</em> ⊛ <em>y</em> = <em>C</em>(<em>x</em>)<sup><em>T</em></sup><em>y</em></span></em></p>
+</div>
+<h1 id="transformée-de-fourier-discrète">Transformée de Fourier
+discrète</h1>
+<h2 id="définition">Définition</h2>
+<p>Nous rappelons ci-dessous la définition de la transformée de Fourier
+discrète.</p>
+<div class="tcolorbox">
+<p>La transformée de Fourier discrète <span
+class="math inline">ℱ(<em>x</em>)</span> de <span
+class="math inline"><em>x</em> = (<em>x</em><sub>0</sub>,<em>x</em><sub>1</sub>,...,<em>x</em><sub><em>N</em> − 1</sub>)</span>
+est la suite de k éléments : <span class="math inline">$\mathcal{F}(x)_k
+= \tilde x_k = \sum_{n=0}^{N-1} x_n e^{-i\frac{2 \pi k
+n}{N}}$</span></p>
+</div>
+<p>Posons <span class="math inline">$\omega = e^{- i
+\frac{2\pi}{N}}$</span>. Nous notons <span class="math inline">$F =
+\frac{1}{\sqrt{N}}\begin{bmatrix}  
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; \omega &amp; \omega^{2} &amp; \cdots &amp; \omega^{N-1}\\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots\\
+1 &amp; \omega^{N-1} &amp; \omega^{2(N-1)}&amp; \cdots&amp;
+\omega^{(N-1)(N-1)}
+\end{bmatrix}$</span> la matrice de Fourier. <span
+class="math inline">[<em>F</em>]<sub><em>i</em>, <em>j</em></sub> = <em>ω</em><sup><em>i</em><em>j</em></sup></span>
+: c’est la matrice de Van der Monde générée par les racines de l’unité
+d’ordre N.</p>
+<p>La transformée de Fourier s’exprime simplement comme <span
+class="math inline">$\tilde x = \sqrt{N} F x$</span>. Pour la suite,
+nous utiliserons les propriétés de la matrice <span
+class="math inline"><em>F</em></span> pour démontrer les propriétés de
+la transformée de Fourier.</p>
+<div id="prop:matrice_Fourier" class="property">
+<p><strong>Propriété 3</strong> (proprietes de la matrice de Fourier).
+<em></em></p>
+<p><em><br />
+</em></p>
+<ul>
+<li><p><em><span class="math inline"><em>F</em></span> est unitaire :
+<span
+class="math inline"><em>F</em><sup><em>H</em></sup><em>F</em> = <em>F</em><em>F</em><sup><em>H</em></sup> = <em>I</em><sub><em>N</em></sub></span></em></p></li>
+<li><p><em><span class="math inline"><em>F</em></span> est symmmétrique
+: <span
+class="math inline"><em>F</em><sup><em>T</em></sup> = <em>F</em></span></em></p></li>
+</ul>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <span class="math inline">$\forall (i,j) \in
+[\![0,N-1]\!]^2,  [F^H F]_{l,m} = \sum_{k=0}^{N-1} [F^*]_{k,l} [F]_{k,m}
+= (\frac{1}{\sqrt{N}})^2 \sum_{k=0}^{N-1} e^{- i \frac{2 \pi k
+(l-m)}{N}} = \frac{1}{N} N \delta [l-m] = \delta [l-m]$</span> ◻</p>
+</div>
+<p>Nous en déduisons directement l’expression de la transformée de
+Fourier discrète inverse : <span class="math display">$$\mathcal{F} =
+(\sqrt{N} F) \cdot \Rightarrow \mathcal{F}^{-1} = (\frac{1}{\sqrt{N}}
+{F^*}) \cdot$$</span> (nous avons aussi <span
+class="math inline">$\mathcal{F}^{-1} = \frac{1}{N}
+\mathcal{F}^*$</span>)</p>
+<div class="tcolorbox">
+<p>Nous avons les propriété suivantes :</p>
+<ul>
+<li><p><strong>Linéarité</strong> : <span
+class="math inline">ℱ{<em>a</em><em>x</em> + <em>b</em><em>y</em>} = <em>a</em><em>x̃</em> + <em>b</em><em>ỹ</em></span>,
+où <span class="math inline"><em>a</em></span> et <span
+class="math inline"><em>b</em></span> sont des scalaires
+complexes.</p></li>
+<li><p><strong>Symétrie hermitienne</strong> : <span
+class="math inline"><em>x</em> ∈ ℝ ⇒ <em>x̃</em><sub>−<em>k</em></sub> = <em>x̃</em><sub><em>k</em></sub><sup>*</sup>∀<em>k</em> ∈ [ [0,<em>N</em>−1] ]</span></p></li>
+<li><p><strong>Décalage dans le temps</strong> : <span
+class="math inline">$y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k =
+\mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}, \forall k \in
+[\![0,N-1]\!]$</span>.</p></li>
+<li><p><strong>Modulation</strong> : Si <span class="math inline">$y_n =
+e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k =
+\mathcal{F}\{x\}_{k-m} \forall k \in [\![0,N-1]\!]$</span>.</p></li>
+</ul>
+<p>(Il est ici convenu que <span
+class="math inline">∀<em>k</em> ∈ ℕ</span>, <span
+class="math inline">ℱ{<em>x</em>}<sub><em>k</em></sub> := ℱ{<em>x</em>}<sub><em>k</em> mod  <em>N</em></sub></span>)</p>
+</div>
+<div class="property">
+<p><strong>Propriété 4</strong>. <em>Toute matrice circulante <span
+class="math inline"><em>X</em> ∈ 𝒞</span> est diagonalisable dans la
+base de Fourier ( <span class="math inline">$\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}$</span>, <span
+class="math inline"><em>k</em> ∈ [ [0,<em>N</em>−1] ]</span>)</em></p>
+<p><em>avec pour valeurs propres respectives les <span
+class="math inline"><em>x̃</em><sub><em>k</em></sub>, <em>k</em> ∈ [ [0,<em>N</em>−1] ]</span>
+:</em></p>
+<p><em><span class="math display">$$X =  F \begin{bmatrix}
+    \tilde x_0 &amp;  &amp;  &amp;  \\
+      &amp; \tilde x_1 &amp;   &amp;  \\
+     &amp;  &amp; \ddots &amp;  \\
+     &amp;   &amp;  &amp; \tilde x_{N-1} \\
+    \end{bmatrix} F^{-1} = F Diag(\tilde x)F^{-1}$$</span></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> soit <span
+class="math inline"><em>X</em> = <em>C</em>(<em>x</em><sub>0</sub>,⋯<em>x</em><sub><em>N</em> − 1</sub>)</span>
+une matrice circulante. Soit <span
+class="math inline"><em>k</em> ∈ [ [0,<em>N</em>−1] ]</span>. Nous
+avons</p>
+<p><span class="math display">$$\begin{aligned}
+_m = \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{nk}  \\
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m)k} \omega^{mk}
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m \mod N)k}\omega^{mk}
+\end{aligned}$$</span>.</p>
+<p>La dernière égalité vient du fait que <span
+class="math inline"><em>ω</em></span> est une racine N-ième de l’unité.
+<span class="math display">$$\sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n
+- m \mod N)k} \omega^{mk} =  (\sum_{n=0}^{N-1} x_{n} \omega^{nk})
+\omega^{mk} = \tilde x_k \omega^{mk}$$</span>.</p>
+<p>Nous avons donc :</p>
+<p><span class="math display">$$M \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}
+= \tilde x_k \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}$$</span>, ce qui prouve bien que <span
+class="math inline">$\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}$</span> est vecteur propre pour la valeur propre <span
+class="math inline"><em>x̃</em><sub><em>k</em></sub></span> de <span
+class="math inline"><em>M</em></span>.</p>
+<p>Puisque d’après <a href="#prop:matrice_Fourier"
+data-reference-type="ref" data-reference="prop:matrice_Fourier">3</a>
+ces <span class="math inline"><em>N</em></span> vecteurs sont
+indépendants (<span class="math inline"><em>F</em></span> est
+inversible), nous avons trouvé une base de vecteur propres et les
+matrices circulantes sont diagonalisables dans la base proposée. ◻</p>
+</div>
+<p>Nous pouvons réécrire ce dernier résultat de manière matricielle
+:</p>
+<p>La précédente propriété nous permet de démontrer le théorème de
+convolution :</p>
+<div class="tcolorbox">
+<p>Soient <span class="math inline"><em>x</em></span> et <span
+class="math inline"><em>y</em></span> deux vecteurs de <span
+class="math inline">ℂ<sup><em>N</em></sup></span>. Nous avons : <span
+class="math display">ℱ{<em>x</em> ⊛ <em>y</em>} = ℱ{<em>x</em>} ⊙ ℱ{<em>y</em>}</span>
+et <span class="math display">$$\mathcal{F}\{x \odot y \} = \frac{1}{N}
+(\mathcal{F} \{x\} \circledast \mathcal{F} \{y\})$$</span>, où <span
+class="math inline">⊙</span> désigne le produit de Hadamard (i.e.
+coefficient par coefficient) entre deux vecteurs.</p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> Nous avons : <span
+class="math display">$$x\circledast y = C(x)^T y = (F Diag(\tilde x)
+F^{-1})^T y = F^{-1} Diag(\tilde x) F y \Rightarrow \sqrt{N} F (x
+\circledast y) = Diag(\tilde x) \sqrt{N} F y$$</span>. Cela nous donne
+donc bien, en identifiant terme à terme :</p>
+<p><span
+class="math display">ℱ{<em>x</em> ⊛ <em>y</em>} = (ℱ{<em>x</em>}) ⊙ (ℱ{<em>y</em>})</span>
+En prenant <span
+class="math inline"><em>x</em> = ℱ<sup>−1</sup>{<em>x</em>′}</span> et
+<span
+class="math inline"><em>y</em> = ℱ<sup>−1</sup>{<em>y</em>′}</span> dans
+l’équation précédente : <span class="math display">$$\begin{aligned}
+x' \odot y' = \mathcal{F}\{\mathcal{F}^{-1}\{x'\} \circledast
+\mathcal{F}^{-1}\{y'\}
+\}  =  \mathcal{F}\{\frac{1}{N}\mathcal{F}^*\{x'\} \circledast
+\frac{1}{N} \mathcal{F}^*\{y'\} \}
+    \\
+    \Rightarrow \frac{1}{N} \mathcal{F}^* \{x' \odot y'\}  =
+\mathcal{F}^{-1} \{x' \odot y'\} = \frac{1}{N}\mathcal{F}^*\{x'\}
+\circledast \frac{1}{N} \mathcal{F}^*\{y'\}  
+\end{aligned}$$</span></p>
+<p>où la dernière ligne utilise que <span
+class="math inline">$\mathcal{F}^{-1} = \frac{1}{N}
+\mathcal{F}^*$</span>.</p>
+<p>Finalement, nous obtenons le résultat attendu en prenant le conjugué
+et en multipliant par <span class="math inline">$\frac{1}{N}$</span> des
+deux côtés de l’égalité. ◻</p>
+</div>
+<h2 id="transformées-de-fourier-discrètes-usuelles">Transformées de
+Fourier discrètes usuelles</h2>
+<div id="tab:2cols">
+<table>
+<caption>Transformées de Fourier discrètes usuelles</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span
+class="math inline"><em>x</em><sub><em>n</em></sub></span></th>
+<th style="text-align: left;"><span
+class="math inline"><em>x̃</em><sub><em>k</em></sub> = ℱ(<em>x</em>)<sub><em>k</em></sub></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span
+class="math inline"><em>x</em><sub><em>n</em></sub> = <em>δ</em><sub><em>n</em><sub>0</sub></sub>[<em>n</em>]</span></td>
+<td style="text-align: left;"><span class="math inline">$\tilde x_k =
+e^{i\frac{2\pi n_0 n}{N}}$</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">$x_n = e^{i
+\frac{2 \pi k_0 n}{N}}$</span></td>
+<td style="text-align: left;"><span
+class="math inline"><em>x̃</em><sub><em>k</em></sub> = <em>δ</em><sub><em>k</em><sub>0</sub></sub>[<em>k</em>]</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">$\frac{1}{n_0}
+1_{[\![0,n_0 - 1]\!]}[n]$</span></td>
+<td style="text-align: left;"><span class="math inline">$e^{-i \pi
+\frac{k (n_0-1)}{N}} \frac{\sin{\frac{\pi k n_0}{N}}}{n_0 \sin{\pi
+\frac{k}{N}}}$</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cette dernière fonction est l’équivalent discret du sinus cardinal
+continu. Nous avons tracé une représentation graphique ci-dessous :</p>
+<figure id="fig:mainfigure">
+<figure id="fig:subfigure1">
+<img src="sinus_cardinal_decentre.png" />
+<figcaption><span
+class="math inline"><em>k</em> ∈ [ [0,<em>N</em>−1] ]</span></figcaption>
+</figure>
+<figure id="fig:subfigure2">
+<img src="sinus_cardinal_centre.png" />
+<figcaption><span class="math inline">$k \in [\![-\frac{N}{2},
+\frac{N}{2} - 1]\!]$</span></figcaption>
+</figure>
+<figcaption>tracé de <span class="math inline">$k \mapsto
+\frac{\sin(\frac{\pi k n_0}{N})}{n_0 \sin(\frac{\pi
+k}{N})}$</span></figcaption>
+</figure>
+<p>Il est plus naturel de représenter le sinus cardinal négatif sur
+<span class="math inline">$[\![-\frac{N}{2},\frac{N}{2} - 1]\!]$</span>.
+Par périodicité, il s’agit d’une rotation cyclique des valeurs sur <span
+class="math inline">[ [0,<em>N</em>−1] ]</span>.</p>
+<p><u>Exercice :</u> Montrer que la transformée de Fourier discrète de
+la suite finie <span class="math inline">$( \begin{pmatrix}
+N-1 \\
+n
+\end{pmatrix})_n$</span> est <span class="math inline">$((1+e^{i\frac{2
+\pi k}{N}})^{N-1})_k$</span></p>
+<h1 id="implémentation-algorithmique-et-applications">Implémentation
+algorithmique et applications</h1>
+<h2
+id="implémentation-fast-fourier-transform-transformée-de-fourier-rapide">Implémentation
+: Fast Fourier Transform, transformée de Fourier rapide</h2>
+<p>Le calcul naïf de la transformée de Fourier discrète recquiert de
+l’ordre de <span class="math inline"><em>N</em><sup>2</sup></span>
+opérations (multiplications ou additions complexes) : pour chaque indice
+de fréquence <span class="math inline"><em>k</em></span>, il faut
+calculer la somme des <span class="math inline"><em>N</em></span>
+composantes <span class="math inline">$(x_n e^{-i\frac{2\pi
+kn}{N}})_n$</span>.</p>
+<p>L’idée principale de la FFT repose sur une décomposition récursive du
+calcul de la DFT. En divisant le signal d’entrée en sous-séquences de
+tailles plus petites, on peut réduire le nombre d’opérations
+nécessaires.</p>
+<p>Pour simplifier, supposons que <span
+class="math inline"><em>N</em></span> est une puissance de 2. On peut
+écrire <span class="math inline"><em>x</em><sub><em>n</em></sub></span>
+comme la somme de deux séquences : <span
+class="math display"><em>x</em><sub><em>n</em></sub> = <em>x</em><sub>pair</sub>(<em>n</em>) + <em>x</em><sub>impair</sub>(<em>n</em>)</span>
+avec : <span
+class="math display"><em>x</em><sub>pair</sub>(<em>m</em>) = <em>x</em><sub>2<em>m</em></sub>,  <em>x</em><sub>impair</sub>(<em>m</em>) = <em>x</em><sub>2<em>m</em> + 1</sub>.</span></p>
+<p>La DFT peut alors être exprimée comme : <span
+class="math display">$$\begin{aligned}
+\tilde x_k = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N} k(2m)} +
+\sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N} k(2m+1)}.
+\\ = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i
+\frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2}
+km}.
+\end{aligned}$$</span></p>
+<p>Pour <span class="math inline"><em>k</em>∈</span></p>
+<p>En factorisant, cela donne :</p>
+<p>Pour <span
+class="math inline"><em>k</em> ∈ [ [0,<em>N</em>/2−1] ]</span>,</p>
+<p><span class="math display">$$\begin{cases} \tilde x_k
+=  \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i
+\frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2}
+km}.  \\
+\tilde x_{\frac{N}{2} + k} = \sum_{m=0}^{N/2-1} x_{2m} e^{-i
+\frac{2\pi}{N/2} km} + e^{-i \pi} e^{-i \frac{2\pi}{N} k}
+\sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}
+\end{cases}$$</span></p>
+<p><span class="math display">$$\Rightarrow \begin{cases} \tilde x_k
+=  \tilde x_k^{\text{pair}} + e^{-i \frac{2\pi}{N} k} \tilde
+x_k^{\text{impair}}  \\
+\tilde x_{\frac{N}{2} + k} = \tilde x_k^{\text{pair}} - e^{-i
+\frac{2\pi}{N} k} \tilde x_k^{\text{impair}}
+\end{cases}$$</span></p>
+<p>où <span
+class="math inline"><em>x̃</em><sub><em>k</em></sub><sup>pair</sup></span>
+et <span
+class="math inline"><em>x̃</em><sub><em>k</em></sub><sup>impair</sup></span>
+sont les TFDs des sous-séquences de taille <span
+class="math inline"><em>N</em>/2</span>.</p>
+<p>Le processus se poursuit en décomposant chaque sous-séquence jusqu’à
+obtenir des séquences de taille 1, pour lesquelles la TFD est la valeur
+du coefficient. Si nous notons <span
+class="math inline"><em>T</em>(<em>N</em>)</span> la complexité du
+calcul de la TFD sur une liste de taille <span
+class="math inline"><em>N</em></span> par l’algorithme de Cooley-Tuckey,
+nous avons :</p>
+<p><span class="math display">$$\begin{cases}
+    T(N) = 2T(\frac{N}{2}) + N \\
+    T(1) = 0
+\end{cases}$$</span></p>
+<p>Le premier terme correspond au calcul des DFT des deux
+sous-séquences. Le deuxième terme de la somme correspond au calcul des
+<span class="math inline"><em>x̃</em><sub><em>k</em></sub></span> en
+fonction de ces dernières valeurs.</p>
+<p>En posant <span
+class="math inline"><em>p</em> = log<sub>2</sub><em>N</em></span> et
+<span
+class="math inline"><em>S</em>(<em>p</em>) = <em>T</em>(<em>N</em>=2<sup><em>p</em></sup>)</span>,
+l’équation de complexité devient :</p>
+<p><span class="math display">$$\begin{cases}
+S(p) = 2 S(p-1) + 2^p \\
+S(0) = 0
+\end{cases}$$</span></p>
+<p>Une récurrence immédiate donne :</p>
+<p><span
+class="math display"><em>S</em>(<em>p</em>) = <em>p</em>2<sup><em>p</em></sup> ⇒ <em>T</em>(<em>N</em>) = <em>S</em>(log<sub>2</sub><em>N</em>) = <em>N</em>log<sub>2</sub><em>N</em></span>.</p>
+<p>Cela est meilleur que la complexité naïve (de <span
+class="math inline"><em>N</em><sup>2</sup></span>).</p>
+<h2 id="application-produit-de-convolution-rapide">Application : produit
+de convolution rapide</h2>
+<p>Soient <span
+class="math inline"><em>x</em> ∈ ℂ<sup><em>p</em></sup></span> et <span
+class="math inline"><em>y</em> ∈ ℂ<sup><em>q</em></sup></span> deux
+vecteurs. Nous souhaitons calculer la convolution (discrète) <span
+class="math display">$$x \ast y = (\sum_{k=0}^{p-1} x_k y_{m-k})_{0 \leq
+m &lt; p + q}$$</span> (où <span
+class="math inline"><em>x</em><sub><em>k</em></sub> = 0</span> lorsque
+<span class="math inline"><em>k</em> ∉ [ [0,<em>p</em>−1] ]</span> et
+<span class="math inline"><em>y</em><sub><em>k</em></sub> = 0</span>
+lorsque <span
+class="math inline"><em>k</em> ∉ [ [0,<em>q</em>−1] ]</span> .</p>
+<p>Le calcul naïf nécessite de l’ordre de <span
+class="math inline">𝒪(<em>p</em><em>q</em>)</span> opérations
+élémentaires.</p>
+<p>Le théorème deconvolution nous permet de réduire facilement la
+complexité cu calcul de <span
+class="math inline"><em>x</em> * <em>y</em></span> : remarquons qu’un
+produit de convolution classique est une convolution circulaire si l’on
+étend suffisemment le support des vecteurs.</p>
+<p>Posons <span
+class="math inline"><em>N</em> = <em>p</em> + <em>q</em> − 1</span> et
+notons respectivement <span
+class="math inline"><em>x</em><sup>(<em>N</em>)</sup></span> et <span
+class="math inline"><em>y</em><sup>(<em>N</em>)</sup></span> les
+vecteurs étendus de <span class="math inline"><em>x</em></span> et <span
+class="math inline"><em>y</em></span> avec <span
+class="math inline"><em>N</em></span> éléments (avec <span
+class="math inline">$x^{(N)} = \begin{bmatrix}
+    x ~ 0 \cdots 0
+\end{bmatrix}$</span> et <span class="math inline">$y^{(N)} =
+\begin{bmatrix}
+    y ~  0 \cdots 0
+\end{bmatrix}$</span>). <span
+class="math display"><em>x</em> * <em>y</em> = <em>x</em><sup>(<em>N</em>)</sup> ⊛ <em>y</em><sup>(<em>N</em>)</sup> = ℱ<sup>−1</sup>{ℱ(<em>x</em><sup>(<em>N</em>)</sup>}⊙ℱ{<em>y</em><sup>(<em>N</em>)</sup>)}</span></p>
+<p>Cette méthodes nécessite les opérations suivantes:</p>
+<ul>
+<li><p>Calcul des deux transformées de Fourier (<span
+class="math inline">𝒪(<em>N</em>log<sub>2</sub>(<em>N</em>)</span>))</p></li>
+<li><p>Produit de Hadamard (<span
+class="math inline">𝒪(<em>N</em>)</span>)</p></li>
+<li><p>Transformée de Fourier inverse (<span
+class="math inline">𝒪(<em>N</em>log<sub>2</sub><em>N</em>)</span>)</p></li>
+</ul>
+<p>La complexité de cette nouvelle méthode est en <span
+class="math inline">𝒪((<em>p</em>+<em>q</em>)log<sub>2</sub>(<em>p</em>+<em>q</em>)) ≪ 𝒪(<em>p</em><em>q</em>)</span>,
+elle accélère significativement le calcul de la convolution.</p>
+<p>En python, la fonction <code>scipy.signal.convolve</code> du package
+<code>scipy</code> utilise l’astuce que nous venons d’exposer pour
+calculer de la convolution entre deux tableaux.</p>
+<p>Les calculs de produits polynômes relevant également du calcul de
+convolution, ou les produits d’entiers peuvent également grandement être
+améliorés avec cette méthode.</p>
+<h1 id="memo">Memo</h1>
+<div class="tcolorbox">
+<ul>
+<li><p><strong>Définition :</strong> <span
+class="math display">$$\mathcal{F}(x)_k = \tilde x_k = \sum_{n=0}^{N-1}
+x_n e^{-i\frac{2 \pi k n}{N}}$$</span> <span
+class="math display">$$\mathcal{F}^{-1}(\tilde x)_n = x_n =
+\sum_{k=0}^{N-1} x_k e^{i\frac{2 \pi n k}{N}}$$</span></p></li>
+<li><p><strong>Linéarité :</strong> <span
+class="math display">ℱ{<em>a</em><em>x</em> + <em>b</em><em>y</em>} = <em>a</em><em>x̃</em> + <em>b</em><em>ỹ</em></span>
+où <span class="math inline"><em>a</em>, <em>b</em> ∈ ℂ</span>.</p></li>
+<li><p><strong>Symétrie hermitienne :</strong> <span
+class="math display"><em>x</em> ∈ ℝ ⇒ <em>x̃</em><sub>−<em>k</em></sub> = <em>x̃</em><sub><em>k</em></sub><sup>*</sup>  ∀<em>k</em> ∈ [ [0,<em>N</em>−1] ]</span></p></li>
+<li><p><strong>Décalage dans le temps :</strong> <span
+class="math display">$$y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k =
+\mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}$$</span></p></li>
+<li><p><strong>Modulation :</strong> <span class="math display">$$y_n =
+e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k =
+\mathcal{F}\{x\}_{k-m}$$</span></p></li>
+<li><p><strong>Convolution :</strong> <span
+class="math display">ℱ{<em>x</em> ⊛ <em>y</em>} = ℱ{<em>x</em>} ⊙ ℱ{<em>y</em>}</span>
+<span class="math display">$$\mathcal{F}\{x \odot y \} = \frac{1}{N}
+\mathcal{F} \{x\} \circledast \mathcal{F} \{y\}$$</span></p></li>
+</ul>
+</div>

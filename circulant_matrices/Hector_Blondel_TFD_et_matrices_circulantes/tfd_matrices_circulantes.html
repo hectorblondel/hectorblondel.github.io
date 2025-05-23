@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Hector Blondel" />
+  <title>main</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Per-chapter bibliographies with BibLaTeXMatrices
+circulantes et propriétés de la Transformée de Fourier Discrète</h1>
+<p class="author">Hector Blondel</p>
+<p class="date">November 2024</p>
+</header>
+<div class="center">
+<div class="tabular">
+<p><span>p<span>0.9</span></span><br />
+<strong>Fiche Identité:</strong></p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Discipline</th>
+<th style="text-align: left;">Mathématiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Auteur</td>
+<td style="text-align: left;">Hector Blondel</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Année</td>
+<td style="text-align: left;">2024-2025</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cours concerné</td>
+<td style="text-align: left;">Traitement du signal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Relu par</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br />
+</p>
+</div>
+</div>
+<div class="center">
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p><strong>Résumé:</strong></p>
+<p>La transformée de Fourier discrète se définit naturellement et hérite
+de propriétés similaires à celles de la transformée de Fourier
+classique. Elle peut-être vue comme une opération linéaire (et donc
+ayant sa matrice associée). Le formalisme matriciel permet de retrouver
+beaucoup de propriétés de la transformée de Fourier discrète, comme le
+théorème de convolution (la transformée de Fourier de la convolution
+circulaire de deux vecteurs est également le produit terme-à-terme des
+transformées de Fourier de ces deux vecteurs)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Mots-clés</strong> : Traitement
+numérique du signal, Transformée de Fourier, convolution circulaire,
+matrice circulante</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 class="unnumbered" id="introduction">Introduction</h1>
+<p>Que ce soit pour l’analyse de signaux temporels, ou en
+télécommunications pour a transmission d’information ou , la
+transformation de Fourier est omniprésente dans la plupart des
+applications d’ingénieurie. Bien que notre monde soit physique et
+continu, l’ingénieur doit se résilier à manipuler informatiquement des
+signaux à durée fini et à temps discret. La transformée de Fourier
+discrète est alors nécessaire.</p>
+<p>Nous nous proposons ici d’introduire la transformée de Fourier
+discrète, sous un angle matriciel, en compléménet du cours de première
+année de traitement du signal de Centrale-Supélec. Cet angle permettra
+au lecteur de visulaliser plus facilement ce qui se passe, et de pouvoir
+vérifier ou redémontrer facilement les propriétés.</p>
+<div class="notations">
+<p><strong>Notations 1</strong>. <em>Soit <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%20%5Cin%20%5Cmathbb%7BN%7D"
+alt="N \in \mathbb{N}" title="N \in \mathbb{N}" class="math inline" />.
+Nous notons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BM%7D_n%28%5Cmathbb%7BC%7D%29"
+alt="\mathcal{M}_n(\mathbb{C})" title="\mathcal{M}_n(\mathbb{C})"
+class="math inline" /> l’ensemble des matrices carrées de taille <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> à coefficients dans <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BC%7D"
+alt="\mathbb{C}" title="\mathbb{C}" class="math inline" />. Les
+coefficients des matrices seront indicés de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%200" alt="0"
+title="0" class="math inline" /> à <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N-1" alt="N-1"
+title="N-1" class="math inline" /> : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cforall%20%28i%2Cj%29%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D%5E2"
+alt="\forall (i,j) \in [\![0,N-1]\!]^2"
+title="\forall (i,j) \in [\![0,N-1]\!]^2" class="math inline" />, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5BM%5D_%7Bi%2Cj%7D"
+alt="[M]_{i,j}" title="[M]_{i,j}" class="math inline" /> désigne le
+coefficient <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i%2Cj"
+alt="i,j" title="i,j" class="math inline" /> de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20M%20%5Cin%20%5Cmathcal%7BM%7D_n%28%5Cmathbb%7BC%7D%29"
+alt="M \in \mathcal{M}_n(\mathbb{C})"
+title="M \in \mathcal{M}_n(\mathbb{C})" class="math inline" /> et <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x_i" alt="x_i"
+title="x_i" class="math inline" /> désigne le coefficient <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20i" alt="i"
+title="i" class="math inline" /> du vecteur <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%5Cin%20%5Cmathbb%7BC%7D%5EN"
+alt="x \in \mathbb{C}^N" title="x \in \mathbb{C}^N"
+class="math inline" />.</em></p>
+</div>
+<h1 id="matrices-circulantes">Matrices circulantes</h1>
+<div class="tcolorbox">
+<p>L’application <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20C%20%3A%20%5Cbegin%7Bcases%7D%0A%5Cmathbb%7BC%7D%5EN%20%5Cto%20%5Cmathcal%7BM%7D_N%28%5Cmathbb%7BC%7D%29%20%20%5C%5C%0Ax%20%3D%20%28x_0%2C%20%5Cldots%2C%20x_%7BN-1%7D%29%20%5Cmapsto%20%0A%5Cbegin%7Bbmatrix%7D%20%0Ax_0%20%26%20x_1%20%26%20%5Ccdots%20%26%20x_%7BN-1%7D%20%5C%5C%20%0Ax_%7BN-1%7D%20%26%20x_0%20%26%20%5Ccdots%20%26%20x_%7BN-2%7D%20%5C%5C%20%0A%5Cvdots%20%26%20%5Cvdots%20%26%20%5Cddots%20%26%20%5Cvdots%20%5C%5C%20%0Ax_1%20%26%20x_2%20%26%20%5Ccdots%20%26%20x_0%20%5C%5C%20%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Bcases%7D"
+alt="C : \begin{cases}
+\mathbb{C}^N \to \mathcal{M}_N(\mathbb{C})  \\
+x = (x_0, \ldots, x_{N-1}) \mapsto 
+\begin{bmatrix} 
+x_0 &amp; x_1 &amp; \cdots &amp; x_{N-1} \\ 
+x_{N-1} &amp; x_0 &amp; \cdots &amp; x_{N-2} \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+x_1 &amp; x_2 &amp; \cdots &amp; x_0 \\ 
+\end{bmatrix}
+\end{cases}" title="C : \begin{cases}
+\mathbb{C}^N \to \mathcal{M}_N(\mathbb{C})  \\
+x = (x_0, \ldots, x_{N-1}) \mapsto 
+\begin{bmatrix} 
+x_0 &amp; x_1 &amp; \cdots &amp; x_{N-1} \\ 
+x_{N-1} &amp; x_0 &amp; \cdots &amp; x_{N-2} \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+x_1 &amp; x_2 &amp; \cdots &amp; x_0 \\ 
+\end{bmatrix}
+\end{cases}" class="math display" /> est un morphisme de groupe de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28%5Cmathbb%7BC%7D%5EN%20%3B%20%2B%29"
+alt="(\mathbb{C}^N ; +)" title="(\mathbb{C}^N ; +)"
+class="math inline" /> vers <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28%5Cmathcal%7BM%7D_N%28%5Cmathbb%7BC%7D%29%2C%20%2B%29"
+alt="(\mathcal{M}_N(\mathbb{C}), +)"
+title="(\mathcal{M}_N(\mathbb{C}), +)" class="math inline" /></p>
+<p>Nous appelons "matrices circulantes" l’image de C.</p>
+</div>
+<p>Par la suite, nous noterons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BC%7D"
+alt="\mathcal{C}" title="\mathcal{C}" class="math inline" /> l’ensemble
+des matrices circulantes.</p>
+<p>Les matrices circulantes permettent de représenter algébriquement
+l’opération de convolution circulaire.</p>
+<div class="definition">
+<p><strong>Définition 2</strong>. <em><span>convolution
+circulaire</span> Soient <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%2Cy%20%5Cin%20%5Cmathbb%7BC%7D%5EN"
+alt="x,y \in \mathbb{C}^N" title="x,y \in \mathbb{C}^N"
+class="math inline" /> deux vecteurs complexes. Le produit de
+convolution circulaire est le vecteur de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BC%7D%5EN"
+alt="\mathbb{C}^N" title="\mathbb{C}^N" class="math inline" /> dont les
+coefficients sont :</em></p>
+<p><em><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%28x%20%5Ccircledast%20y%29_m%20%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bm-n%20%5Cmod%20N%7D%20y_%7Bn%7D"
+alt="(x \circledast y)_m = \sum_{n=0}^{N-1} x_{m-n \mod N} y_{n}"
+title="(x \circledast y)_m = \sum_{n=0}^{N-1} x_{m-n \mod N} y_{n}"
+class="math display" /></em></p>
+<p><em>L’opérateur C défini plus haut nous permet d’exprimer facilement
+cette opération :</em></p>
+<p><em><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x%20%5Ccircledast%20y%20%3D%20C%28x%29%5ET%20y"
+alt="x \circledast y = C(x)^T y" title="x \circledast y = C(x)^T y"
+class="math display" /></em></p>
+</div>
+<h1 id="transformée-de-fourier-discrète">Transformée de Fourier
+discrète</h1>
+<h2 id="définition">Définition</h2>
+<p>Nous rappelons ci-dessous la définition de la transformée de Fourier
+discrète.</p>
+<div class="tcolorbox">
+<p>La transformée de Fourier discrète <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%28x%29"
+alt="\mathcal{F}(x)" title="\mathcal{F}(x)" class="math inline" /> de
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%3D%20%28x_0%2C%20x_1%2C%20...%2C%20x_%7BN-1%7D%29"
+alt="x = (x_0, x_1, ..., x_{N-1})" title="x = (x_0, x_1, ..., x_{N-1})"
+class="math inline" /> est la suite de k éléments : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%28x%29_k%20%3D%20%5Ctilde%20x_k%20%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_n%20e%5E%7B-i%5Cfrac%7B2%20%5Cpi%20k%20n%7D%7BN%7D%7D"
+alt="\mathcal{F}(x)_k = \tilde x_k = \sum_{n=0}^{N-1} x_n e^{-i\frac{2 \pi k n}{N}}"
+title="\mathcal{F}(x)_k = \tilde x_k = \sum_{n=0}^{N-1} x_n e^{-i\frac{2 \pi k n}{N}}"
+class="math inline" /></p>
+</div>
+<p>Posons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Comega%20%3D%20e%5E%7B-%20i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%7D"
+alt="\omega = e^{- i \frac{2\pi}{N}}"
+title="\omega = e^{- i \frac{2\pi}{N}}" class="math inline" />. Nous
+notons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7BN%7D%7D%5Cbegin%7Bbmatrix%7D%20%20%0A1%20%26%201%20%26%201%20%26%20%5Ccdots%20%26%201%5C%5C%0A1%20%26%20%5Comega%20%26%20%5Comega%5E%7B2%7D%20%26%20%5Ccdots%20%26%20%5Comega%5E%7BN-1%7D%5C%5C%0A%5Ccdots%20%26%20%5Ccdots%20%26%20%5Ccdots%20%26%20%5Ccdots%20%26%20%5Ccdots%5C%5C%0A1%20%26%20%5Comega%5E%7BN-1%7D%20%26%20%5Comega%5E%7B2%28N-1%29%7D%26%20%5Ccdots%26%20%5Comega%5E%7B%28N-1%29%28N-1%29%7D%20%0A%5Cend%7Bbmatrix%7D"
+alt="F = \frac{1}{\sqrt{N}}\begin{bmatrix}  
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; \omega &amp; \omega^{2} &amp; \cdots &amp; \omega^{N-1}\\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots\\
+1 &amp; \omega^{N-1} &amp; \omega^{2(N-1)}&amp; \cdots&amp; \omega^{(N-1)(N-1)} 
+\end{bmatrix}" title="F = \frac{1}{\sqrt{N}}\begin{bmatrix}  
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; \omega &amp; \omega^{2} &amp; \cdots &amp; \omega^{N-1}\\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots\\
+1 &amp; \omega^{N-1} &amp; \omega^{2(N-1)}&amp; \cdots&amp; \omega^{(N-1)(N-1)} 
+\end{bmatrix}" class="math inline" /> la matrice de Fourier. <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5BF%5D_%7Bi%2Cj%7D%20%3D%20%5Comega%5E%7Bij%7D"
+alt="[F]_{i,j} = \omega^{ij}" title="[F]_{i,j} = \omega^{ij}"
+class="math inline" /> : c’est la matrice de Van der Monde générée par
+les racines de l’unité d’ordre N.</p>
+<p>La transformée de Fourier s’exprime simplement comme <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x%20%3D%20%5Csqrt%7BN%7D%20F%20x"
+alt="\tilde x = \sqrt{N} F x" title="\tilde x = \sqrt{N} F x"
+class="math inline" />. Pour la suite, nous utiliserons les propriétés
+de la matrice <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F" alt="F"
+title="F" class="math inline" /> pour démontrer les propriétés de la
+transformée de Fourier.</p>
+<div id="prop:matrice_Fourier" class="property">
+<p><strong>Propriété 3</strong> (proprietes de la matrice de Fourier).
+<em></em></p>
+<p><em><br />
+</em></p>
+<ul>
+<li><p><em><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F" alt="F"
+title="F" class="math inline" /> est unitaire : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F%5EH%20F%20%3D%20F%20F%5EH%20%3D%20I_N"
+alt="F^H F = F F^H = I_N" title="F^H F = F F^H = I_N"
+class="math inline" /></em></p></li>
+<li><p><em><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F" alt="F"
+title="F" class="math inline" /> est symmmétrique : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F%5ET%20%3D%20F"
+alt="F^T = F" title="F^T = F" class="math inline" /></em></p></li>
+</ul>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cforall%20%28i%2Cj%29%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D%5E2%2C%20%20%5BF%5EH%20F%5D_%7Bl%2Cm%7D%20%3D%20%5Csum_%7Bk%3D0%7D%5E%7BN-1%7D%20%5BF%5E%2A%5D_%7Bk%2Cl%7D%20%5BF%5D_%7Bk%2Cm%7D%20%3D%20%28%5Cfrac%7B1%7D%7B%5Csqrt%7BN%7D%7D%29%5E2%20%5Csum_%7Bk%3D0%7D%5E%7BN-1%7D%20e%5E%7B-%20i%20%5Cfrac%7B2%20%5Cpi%20k%20%28l-m%29%7D%7BN%7D%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20N%20%5Cdelta%20%5Bl-m%5D%20%3D%20%5Cdelta%20%5Bl-m%5D"
+alt="\forall (i,j) \in [\![0,N-1]\!]^2,  [F^H F]_{l,m} = \sum_{k=0}^{N-1} [F^*]_{k,l} [F]_{k,m} = (\frac{1}{\sqrt{N}})^2 \sum_{k=0}^{N-1} e^{- i \frac{2 \pi k (l-m)}{N}} = \frac{1}{N} N \delta [l-m] = \delta [l-m]"
+title="\forall (i,j) \in [\![0,N-1]\!]^2,  [F^H F]_{l,m} = \sum_{k=0}^{N-1} [F^*]_{k,l} [F]_{k,m} = (\frac{1}{\sqrt{N}})^2 \sum_{k=0}^{N-1} e^{- i \frac{2 \pi k (l-m)}{N}} = \frac{1}{N} N \delta [l-m] = \delta [l-m]"
+class="math inline" /> ◻</p>
+</div>
+<p>Nous en déduisons directement l’expression de la transformée de
+Fourier discrète inverse : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%20%3D%20%28%5Csqrt%7BN%7D%20F%29%20%5Ccdot%20%5CRightarrow%20%5Cmathcal%7BF%7D%5E%7B-1%7D%20%3D%20%28%5Cfrac%7B1%7D%7B%5Csqrt%7BN%7D%7D%20%7BF%5E%2A%7D%29%20%5Ccdot"
+alt="\mathcal{F} = (\sqrt{N} F) \cdot \Rightarrow \mathcal{F}^{-1} = (\frac{1}{\sqrt{N}} {F^*}) \cdot"
+title="\mathcal{F} = (\sqrt{N} F) \cdot \Rightarrow \mathcal{F}^{-1} = (\frac{1}{\sqrt{N}} {F^*}) \cdot"
+class="math display" /> (nous avons aussi <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%5E%2A"
+alt="\mathcal{F}^{-1} = \frac{1}{N} \mathcal{F}^*"
+title="\mathcal{F}^{-1} = \frac{1}{N} \mathcal{F}^*"
+class="math inline" />)</p>
+<div class="tcolorbox">
+<p>Nous avons les propriété suivantes :</p>
+<ul>
+<li><p><strong>Linéarité</strong> : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%5C%7Ba%20x%20%2B%20b%20y%5C%7D%20%3D%20a%20%5Ctilde%7Bx%7D%20%2B%20b%20%5Ctilde%7By%7D"
+alt="\mathcal{F}\{a x + b y\} = a \tilde{x} + b \tilde{y}"
+title="\mathcal{F}\{a x + b y\} = a \tilde{x} + b \tilde{y}"
+class="math inline" />, où <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a" alt="a"
+title="a" class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20b" alt="b"
+title="b" class="math inline" /> sont des scalaires complexes.</p></li>
+<li><p><strong>Symétrie hermitienne</strong> : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%5Cin%20%5Cmathbb%7BR%7D%20%5CRightarrow%20%5Ctilde%7Bx%7D_%7B-k%7D%20%3D%20%5Ctilde%7Bx%7D_k%5E%2A%20%5Cforall%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="x \in \mathbb{R} \Rightarrow \tilde{x}_{-k} = \tilde{x}_k^* \forall k \in [\![0,N-1]\!]"
+title="x \in \mathbb{R} \Rightarrow \tilde{x}_{-k} = \tilde{x}_k^* \forall k \in [\![0,N-1]\!]"
+class="math inline" /></p></li>
+<li><p><strong>Décalage dans le temps</strong> : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y_n%20%3D%20x_%7Bn-m%7D%20%5CRightarrow%20%5Cmathcal%7BF%7D%5C%7By%5C%7D_k%20%3D%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_k%20e%5E%7B-j%20%5Cfrac%7B2%5Cpi%20k%20m%7D%7BN%7D%7D%2C%20%5Cforall%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}, \forall k \in [\![0,N-1]\!]"
+title="y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}, \forall k \in [\![0,N-1]\!]"
+class="math inline" />.</p></li>
+<li><p><strong>Modulation</strong> : Si <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y_n%20%3D%20e%5E%7Bj%20%5Cfrac%7B2%5Cpi%20n%20m%7D%7BN%7D%7D%20x_n%20%5CRightarrow%20%5Cmathcal%7BF%7D%5C%7By%5C%7D_k%20%3D%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_%7Bk-m%7D%20%5Cforall%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="y_n = e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_{k-m} \forall k \in [\![0,N-1]\!]"
+title="y_n = e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_{k-m} \forall k \in [\![0,N-1]\!]"
+class="math inline" />.</p></li>
+</ul>
+<p>(Il est ici convenu que <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cforall%20k%20%5Cin%20%5Cmathbb%7BN%7D"
+alt="\forall k \in \mathbb{N}" title="\forall k \in \mathbb{N}"
+class="math inline" />, <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_k%20%3A%3D%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_%7Bk%20%5Cmod%20N%7D"
+alt="\mathcal{F}\{x\}_k := \mathcal{F}\{x\}_{k \mod N}"
+title="\mathcal{F}\{x\}_k := \mathcal{F}\{x\}_{k \mod N}"
+class="math inline" />)</p>
+</div>
+<div class="property">
+<p><strong>Propriété 4</strong>. <em>Toute matrice circulante <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20X%20%5Cin%20%5Cmathcal%7BC%7D"
+alt="X \in \mathcal{C}" title="X \in \mathcal{C}" class="math inline" />
+est diagonalisable dans la base de Fourier ( <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbegin%7Bbmatrix%7D%0A1%20%5C%5C%0A%5Comega%5E%7Bk%7D%20%5C%5C%0A%5Comega%5E%7B2k%7D%5C%5C%0A...%20%5C%5C%0A%5Comega%5E%7B%28N-1%29k%7D%0A%5Cend%7Bbmatrix%7D"
+alt="\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" title="\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" class="math inline" />, <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="k \in [\![0,N-1]\!]" title="k \in [\![0,N-1]\!]"
+class="math inline" />)</em></p>
+<p><em>avec pour valeurs propres respectives les <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%20%2C%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="\tilde x_k , k \in [\![0,N-1]\!]"
+title="\tilde x_k , k \in [\![0,N-1]\!]" class="math inline" />
+:</em></p>
+<p><em><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20X%20%3D%20%20F%20%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20%5Ctilde%20x_0%20%26%20%20%26%20%20%26%20%20%5C%5C%0A%20%20%20%20%20%20%26%20%5Ctilde%20x_1%20%26%20%20%20%26%20%20%5C%5C%0A%20%20%20%20%20%26%20%20%26%20%5Cddots%20%26%20%20%5C%5C%0A%20%20%20%20%20%26%20%20%20%26%20%20%26%20%5Ctilde%20x_%7BN-1%7D%20%5C%5C%0A%20%20%20%20%5Cend%7Bbmatrix%7D%20F%5E%7B-1%7D%20%3D%20F%20Diag%28%5Ctilde%20x%29F%5E%7B-1%7D"
+alt="X =  F \begin{bmatrix}
+    \tilde x_0 &amp;  &amp;  &amp;  \\
+      &amp; \tilde x_1 &amp;   &amp;  \\
+     &amp;  &amp; \ddots &amp;  \\
+     &amp;   &amp;  &amp; \tilde x_{N-1} \\
+    \end{bmatrix} F^{-1} = F Diag(\tilde x)F^{-1}"
+title="X =  F \begin{bmatrix}
+    \tilde x_0 &amp;  &amp;  &amp;  \\
+      &amp; \tilde x_1 &amp;   &amp;  \\
+     &amp;  &amp; \ddots &amp;  \\
+     &amp;   &amp;  &amp; \tilde x_{N-1} \\
+    \end{bmatrix} F^{-1} = F Diag(\tilde x)F^{-1}"
+class="math display" /></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> soit <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20X%20%3D%20C%28x_0%2C%20%5Ccdots%20x_%7BN-1%7D%29"
+alt="X = C(x_0, \cdots x_{N-1})" title="X = C(x_0, \cdots x_{N-1})"
+class="math inline" /> une matrice circulante. Soit <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="k \in [\![0,N-1]\!]" title="k \in [\![0,N-1]\!]"
+class="math inline" />. Nous avons</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Baligned%7D%0A_m%20%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bn-m%20%5Cmod%20N%7D%20%5Comega%5E%7Bnk%7D%20%20%5C%5C%0A%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bn-m%20%5Cmod%20N%7D%20%5Comega%5E%7B%28n%20-%20m%29k%7D%20%5Comega%5E%7Bmk%7D%20%0A%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bn-m%20%5Cmod%20N%7D%20%5Comega%5E%7B%28n%20-%20m%20%5Cmod%20N%29k%7D%5Comega%5E%7Bmk%7D%0A%5Cend%7Baligned%7D"
+alt="\begin{aligned}
+_m = \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{nk}  \\
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m)k} \omega^{mk} 
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m \mod N)k}\omega^{mk}
+\end{aligned}" title="\begin{aligned}
+_m = \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{nk}  \\
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m)k} \omega^{mk} 
+= \sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m \mod N)k}\omega^{mk}
+\end{aligned}" class="math display" />.</p>
+<p>La dernière égalité vient du fait que <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Comega"
+alt="\omega" title="\omega" class="math inline" /> est une racine N-ième
+de l’unité. <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bn-m%20%5Cmod%20N%7D%20%5Comega%5E%7B%28n%20-%20m%20%5Cmod%20N%29k%7D%20%5Comega%5E%7Bmk%7D%20%3D%20%20%28%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_%7Bn%7D%20%5Comega%5E%7Bnk%7D%29%20%5Comega%5E%7Bmk%7D%20%3D%20%5Ctilde%20x_k%20%5Comega%5E%7Bmk%7D"
+alt="\sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m \mod N)k} \omega^{mk} =  (\sum_{n=0}^{N-1} x_{n} \omega^{nk}) \omega^{mk} = \tilde x_k \omega^{mk}"
+title="\sum_{n=0}^{N-1} x_{n-m \mod N} \omega^{(n - m \mod N)k} \omega^{mk} =  (\sum_{n=0}^{N-1} x_{n} \omega^{nk}) \omega^{mk} = \tilde x_k \omega^{mk}"
+class="math display" />.</p>
+<p>Nous avons donc :</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20M%20%5Cbegin%7Bbmatrix%7D%0A1%20%5C%5C%0A%5Comega%5E%7Bk%7D%20%5C%5C%0A%5Comega%5E%7B2k%7D%5C%5C%0A...%20%5C%5C%0A%5Comega%5E%7B%28N-1%29k%7D%0A%5Cend%7Bbmatrix%7D%20%0A%3D%20%5Ctilde%20x_k%20%5Cbegin%7Bbmatrix%7D%0A1%20%5C%5C%0A%5Comega%5E%7Bk%7D%20%5C%5C%0A%5Comega%5E%7B2k%7D%5C%5C%0A...%20%5C%5C%0A%5Comega%5E%7B%28N-1%29k%7D%0A%5Cend%7Bbmatrix%7D"
+alt="M \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix} 
+= \tilde x_k \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" title="M \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix} 
+= \tilde x_k \begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" class="math display" />, ce qui prouve bien que <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cbegin%7Bbmatrix%7D%0A1%20%5C%5C%0A%5Comega%5E%7Bk%7D%20%5C%5C%0A%5Comega%5E%7B2k%7D%5C%5C%0A...%20%5C%5C%0A%5Comega%5E%7B%28N-1%29k%7D%0A%5Cend%7Bbmatrix%7D"
+alt="\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" title="\begin{bmatrix}
+1 \\
+\omega^{k} \\
+\omega^{2k}\\
+... \\
+\omega^{(N-1)k}
+\end{bmatrix}" class="math inline" /> est vecteur propre pour la valeur
+propre <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k"
+alt="\tilde x_k" title="\tilde x_k" class="math inline" /> de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20M" alt="M"
+title="M" class="math inline" />.</p>
+<p>Puisque d’après <a href="#prop:matrice_Fourier"
+data-reference-type="ref" data-reference="prop:matrice_Fourier">3</a>
+ces <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> vecteurs sont indépendants (<img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20F" alt="F"
+title="F" class="math inline" /> est inversible), nous avons trouvé une
+base de vecteur propres et les matrices circulantes sont diagonalisables
+dans la base proposée. ◻</p>
+</div>
+<p>Nous pouvons réécrire ce dernier résultat de manière matricielle
+:</p>
+<p>La précédente propriété nous permet de démontrer le théorème de
+convolution :</p>
+<div class="tcolorbox">
+<p>Soient <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x" alt="x"
+title="x" class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y" alt="y"
+title="y" class="math inline" /> deux vecteurs de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BC%7D%5EN"
+alt="\mathbb{C}^N" title="\mathbb{C}^N" class="math inline" />. Nous
+avons : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Bx%20%5Ccircledast%20y%20%5C%7D%20%3D%20%5Cmathcal%7BF%7D%20%5C%7Bx%5C%7D%20%5Codot%20%5Cmathcal%7BF%7D%20%5C%7By%5C%7D"
+alt="\mathcal{F}\{x \circledast y \} = \mathcal{F} \{x\} \odot \mathcal{F} \{y\}"
+title="\mathcal{F}\{x \circledast y \} = \mathcal{F} \{x\} \odot \mathcal{F} \{y\}"
+class="math display" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Bx%20%5Codot%20y%20%5C%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20%28%5Cmathcal%7BF%7D%20%5C%7Bx%5C%7D%20%5Ccircledast%20%5Cmathcal%7BF%7D%20%5C%7By%5C%7D%29"
+alt="\mathcal{F}\{x \odot y \} = \frac{1}{N} (\mathcal{F} \{x\} \circledast \mathcal{F} \{y\})"
+title="\mathcal{F}\{x \odot y \} = \frac{1}{N} (\mathcal{F} \{x\} \circledast \mathcal{F} \{y\})"
+class="math display" />, où <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Codot"
+alt="\odot" title="\odot" class="math inline" /> désigne le produit de
+Hadamard (i.e. coefficient par coefficient) entre deux vecteurs.</p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> Nous avons : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x%5Ccircledast%20y%20%3D%20C%28x%29%5ET%20y%20%3D%20%28F%20Diag%28%5Ctilde%20x%29%20F%5E%7B-1%7D%29%5ET%20y%20%3D%20F%5E%7B-1%7D%20Diag%28%5Ctilde%20x%29%20F%20y%20%5CRightarrow%20%5Csqrt%7BN%7D%20F%20%28x%20%5Ccircledast%20y%29%20%3D%20Diag%28%5Ctilde%20x%29%20%5Csqrt%7BN%7D%20F%20y"
+alt="x\circledast y = C(x)^T y = (F Diag(\tilde x) F^{-1})^T y = F^{-1} Diag(\tilde x) F y \Rightarrow \sqrt{N} F (x \circledast y) = Diag(\tilde x) \sqrt{N} F y"
+title="x\circledast y = C(x)^T y = (F Diag(\tilde x) F^{-1})^T y = F^{-1} Diag(\tilde x) F y \Rightarrow \sqrt{N} F (x \circledast y) = Diag(\tilde x) \sqrt{N} F y"
+class="math display" />. Cela nous donne donc bien, en identifiant terme
+à terme :</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Bx%20%5Ccircledast%20y%20%5C%7D%20%3D%20%28%5Cmathcal%7BF%7D%20%5C%7Bx%5C%7D%29%20%5Codot%20%28%5Cmathcal%7BF%7D%20%5C%7By%5C%7D%29"
+alt="\mathcal{F}\{x \circledast y \} = (\mathcal{F} \{x\}) \odot (\mathcal{F} \{y\})"
+title="\mathcal{F}\{x \circledast y \} = (\mathcal{F} \{x\}) \odot (\mathcal{F} \{y\})"
+class="math display" /> En prenant <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%3D%20%5Cmathcal%7BF%7D%5E%7B-1%7D%5C%7Bx%27%5C%7D"
+alt="x = \mathcal{F}^{-1}\{x&#39;\}"
+title="x = \mathcal{F}^{-1}\{x&#39;\}" class="math inline" /> et <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y%20%3D%20%5Cmathcal%7BF%7D%5E%7B-1%7D%5C%7By%27%5C%7D"
+alt="y = \mathcal{F}^{-1}\{y&#39;\}"
+title="y = \mathcal{F}^{-1}\{y&#39;\}" class="math inline" /> dans
+l’équation précédente : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Baligned%7D%0Ax%27%20%5Codot%20y%27%20%3D%20%5Cmathcal%7BF%7D%5C%7B%5Cmathcal%7BF%7D%5E%7B-1%7D%5C%7Bx%27%5C%7D%20%5Ccircledast%20%5Cmathcal%7BF%7D%5E%7B-1%7D%5C%7By%27%5C%7D%20%5C%7D%20%20%3D%20%20%5Cmathcal%7BF%7D%5C%7B%5Cfrac%7B1%7D%7BN%7D%5Cmathcal%7BF%7D%5E%2A%5C%7Bx%27%5C%7D%20%5Ccircledast%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%5E%2A%5C%7By%27%5C%7D%20%5C%7D%0A%20%20%20%20%5C%5C%0A%20%20%20%20%5CRightarrow%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%5E%2A%20%5C%7Bx%27%20%5Codot%20y%27%5C%7D%20%20%3D%20%5Cmathcal%7BF%7D%5E%7B-1%7D%20%5C%7Bx%27%20%5Codot%20y%27%5C%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%5Cmathcal%7BF%7D%5E%2A%5C%7Bx%27%5C%7D%20%5Ccircledast%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%5E%2A%5C%7By%27%5C%7D%20%20%0A%5Cend%7Baligned%7D"
+alt="\begin{aligned}
+x&#39; \odot y&#39; = \mathcal{F}\{\mathcal{F}^{-1}\{x&#39;\} \circledast \mathcal{F}^{-1}\{y&#39;\} \}  =  \mathcal{F}\{\frac{1}{N}\mathcal{F}^*\{x&#39;\} \circledast \frac{1}{N} \mathcal{F}^*\{y&#39;\} \}
+    \\
+    \Rightarrow \frac{1}{N} \mathcal{F}^* \{x&#39; \odot y&#39;\}  = \mathcal{F}^{-1} \{x&#39; \odot y&#39;\} = \frac{1}{N}\mathcal{F}^*\{x&#39;\} \circledast \frac{1}{N} \mathcal{F}^*\{y&#39;\}  
+\end{aligned}" title="\begin{aligned}
+x&#39; \odot y&#39; = \mathcal{F}\{\mathcal{F}^{-1}\{x&#39;\} \circledast \mathcal{F}^{-1}\{y&#39;\} \}  =  \mathcal{F}\{\frac{1}{N}\mathcal{F}^*\{x&#39;\} \circledast \frac{1}{N} \mathcal{F}^*\{y&#39;\} \}
+    \\
+    \Rightarrow \frac{1}{N} \mathcal{F}^* \{x&#39; \odot y&#39;\}  = \mathcal{F}^{-1} \{x&#39; \odot y&#39;\} = \frac{1}{N}\mathcal{F}^*\{x&#39;\} \circledast \frac{1}{N} \mathcal{F}^*\{y&#39;\}  
+\end{aligned}" class="math display" /></p>
+<p>où la dernière ligne utilise que <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BF%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%5E%2A"
+alt="\mathcal{F}^{-1} = \frac{1}{N} \mathcal{F}^*"
+title="\mathcal{F}^{-1} = \frac{1}{N} \mathcal{F}^*"
+class="math inline" />.</p>
+<p>Finalement, nous obtenons le résultat attendu en prenant le conjugué
+et en multipliant par <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cfrac%7B1%7D%7BN%7D"
+alt="\frac{1}{N}" title="\frac{1}{N}" class="math inline" /> des deux
+côtés de l’égalité. ◻</p>
+</div>
+<h2 id="transformées-de-fourier-discrètes-usuelles">Transformées de
+Fourier discrètes usuelles</h2>
+<div id="tab:2cols">
+<table>
+<caption>Transformées de Fourier discrètes usuelles</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctextbf%7B%24x_n%24%7D"
+alt="\textbf{$x_n$}" title="\textbf{$x_n$}" class="math inline" /></th>
+<th style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%20%3D%20%5Cmathcal%7BF%7D%28x%29_k"
+alt="\tilde x_k = \mathcal{F}(x)_k"
+title="\tilde x_k = \mathcal{F}(x)_k" class="math inline" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x_n%20%3D%20%5Cdelta_%7Bn_0%7D%5Bn%5D"
+alt="x_n = \delta_{n_0}[n]" title="x_n = \delta_{n_0}[n]"
+class="math inline" /></td>
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%20%3D%20e%5E%7Bi%5Cfrac%7B2%5Cpi%20n_0%20n%7D%7BN%7D%7D"
+alt="\tilde x_k = e^{i\frac{2\pi n_0 n}{N}}"
+title="\tilde x_k = e^{i\frac{2\pi n_0 n}{N}}"
+class="math inline" /></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x_n%20%3D%20e%5E%7Bi%20%5Cfrac%7B2%20%5Cpi%20k_0%20n%7D%7BN%7D%7D"
+alt="x_n = e^{i \frac{2 \pi k_0 n}{N}}"
+title="x_n = e^{i \frac{2 \pi k_0 n}{N}}" class="math inline" /></td>
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%20%3D%20%5Cdelta_%7Bk_0%7D%5Bk%5D"
+alt="\tilde x_k = \delta_{k_0}[k]" title="\tilde x_k = \delta_{k_0}[k]"
+class="math inline" /></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cfrac%7B1%7D%7Bn_0%7D%201_%7B%5B%5C%21%5B0%2Cn_0%20-%201%5D%5C%21%5D%7D%5Bn%5D"
+alt="\frac{1}{n_0} 1_{[\![0,n_0 - 1]\!]}[n]"
+title="\frac{1}{n_0} 1_{[\![0,n_0 - 1]\!]}[n]"
+class="math inline" /></td>
+<td style="text-align: left;"><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20e%5E%7B-i%20%5Cpi%20%5Cfrac%7Bk%20%28n_0-1%29%7D%7BN%7D%7D%20%5Cfrac%7B%5Csin%7B%5Cfrac%7B%5Cpi%20k%20n_0%7D%7BN%7D%7D%7D%7Bn_0%20%5Csin%7B%5Cpi%20%5Cfrac%7Bk%7D%7BN%7D%7D%7D"
+alt="e^{-i \pi \frac{k (n_0-1)}{N}} \frac{\sin{\frac{\pi k n_0}{N}}}{n_0 \sin{\pi \frac{k}{N}}}"
+title="e^{-i \pi \frac{k (n_0-1)}{N}} \frac{\sin{\frac{\pi k n_0}{N}}}{n_0 \sin{\pi \frac{k}{N}}}"
+class="math inline" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cette dernière fonction est l’équivalent discret du sinus cardinal
+continu. Nous avons tracé une représentation graphique ci-dessous :</p>
+<figure id="fig:mainfigure">
+<figure id="fig:subfigure1">
+<img src="sinus_cardinal_decentre.png" />
+<figcaption><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin%20%5B%5C%21%5B0%2C%20N-1%5D%5C%21%5D"
+alt="k \in [\![0, N-1]\!]" title="k \in [\![0, N-1]\!]"
+class="math inline" /></figcaption>
+</figure>
+<figure id="fig:subfigure2">
+<img src="sinus_cardinal_centre.png" />
+<figcaption><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin%20%5B%5C%21%5B-%5Cfrac%7BN%7D%7B2%7D%2C%20%5Cfrac%7BN%7D%7B2%7D%20-%201%5D%5C%21%5D"
+alt="k \in [\![-\frac{N}{2}, \frac{N}{2} - 1]\!]"
+title="k \in [\![-\frac{N}{2}, \frac{N}{2} - 1]\!]"
+class="math inline" /></figcaption>
+</figure>
+<figcaption>tracé de <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cmapsto%20%5Cfrac%7B%5Csin%28%5Cfrac%7B%5Cpi%20k%20n_0%7D%7BN%7D%29%7D%7Bn_0%20%5Csin%28%5Cfrac%7B%5Cpi%20k%7D%7BN%7D%29%7D"
+alt="k \mapsto \frac{\sin(\frac{\pi k n_0}{N})}{n_0 \sin(\frac{\pi k}{N})}"
+title="k \mapsto \frac{\sin(\frac{\pi k n_0}{N})}{n_0 \sin(\frac{\pi k}{N})}"
+class="math inline" /></figcaption>
+</figure>
+<p>Il est plus naturel de représenter le sinus cardinal négatif sur <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5B%5C%21%5B-%5Cfrac%7BN%7D%7B2%7D%2C%5Cfrac%7BN%7D%7B2%7D%20-%201%5D%5C%21%5D"
+alt="[\![-\frac{N}{2},\frac{N}{2} - 1]\!]"
+title="[\![-\frac{N}{2},\frac{N}{2} - 1]\!]" class="math inline" />. Par
+périodicité, il s’agit d’une rotation cyclique des valeurs sur <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="[\![0,N-1]\!]" title="[\![0,N-1]\!]" class="math inline" />.</p>
+<p><u>Exercice :</u> Montrer que la transformée de Fourier discrète de
+la suite finie <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28%20%5Cbegin%7Bpmatrix%7D%0AN-1%20%5C%5C%0An%0A%5Cend%7Bpmatrix%7D%29_n"
+alt="( \begin{pmatrix}
+N-1 \\
+n
+\end{pmatrix})_n" title="( \begin{pmatrix}
+N-1 \\
+n
+\end{pmatrix})_n" class="math inline" /> est <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28%281%2Be%5E%7Bi%5Cfrac%7B2%20%5Cpi%20k%7D%7BN%7D%7D%29%5E%7BN-1%7D%29_k"
+alt="((1+e^{i\frac{2 \pi k}{N}})^{N-1})_k"
+title="((1+e^{i\frac{2 \pi k}{N}})^{N-1})_k" class="math inline" /></p>
+<h1 id="implémentation-algorithmique-et-applications">Implémentation
+algorithmique et applications</h1>
+<h2
+id="implémentation-fast-fourier-transform-transformée-de-fourier-rapide">Implémentation
+: Fast Fourier Transform, transformée de Fourier rapide</h2>
+<p>Le calcul naïf de la transformée de Fourier discrète recquiert de
+l’ordre de <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%5E2"
+alt="N^2" title="N^2" class="math inline" /> opérations (multiplications
+ou additions complexes) : pour chaque indice de fréquence <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k" alt="k"
+title="k" class="math inline" />, il faut calculer la somme des <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> composantes <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%28x_n%20e%5E%7B-i%5Cfrac%7B2%5Cpi%20kn%7D%7BN%7D%7D%29_n"
+alt="(x_n e^{-i\frac{2\pi kn}{N}})_n"
+title="(x_n e^{-i\frac{2\pi kn}{N}})_n" class="math inline" />.</p>
+<p>L’idée principale de la FFT repose sur une décomposition récursive du
+calcul de la DFT. En divisant le signal d’entrée en sous-séquences de
+tailles plus petites, on peut réduire le nombre d’opérations
+nécessaires.</p>
+<p>Pour simplifier, supposons que <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> est une puissance de 2. On peut écrire
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x_n" alt="x_n"
+title="x_n" class="math inline" /> comme la somme de deux séquences :
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x_n%20%3D%20x_%7B%5Ctext%7Bpair%7D%7D%28n%29%20%2B%20x_%7B%5Ctext%7Bimpair%7D%7D%28n%29"
+alt="x_n = x_{\text{pair}}(n) + x_{\text{impair}}(n)"
+title="x_n = x_{\text{pair}}(n) + x_{\text{impair}}(n)"
+class="math display" /> avec : <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x_%7B%5Ctext%7Bpair%7D%7D%28m%29%20%3D%20x_%7B2m%7D%2C%20%5Cquad%20x_%7B%5Ctext%7Bimpair%7D%7D%28m%29%20%3D%20x_%7B2m%2B1%7D."
+alt="x_{\text{pair}}(m) = x_{2m}, \quad x_{\text{impair}}(m) = x_{2m+1}."
+title="x_{\text{pair}}(m) = x_{2m}, \quad x_{\text{impair}}(m) = x_{2m+1}."
+class="math display" /></p>
+<p>La DFT peut alors être exprimée comme : <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Baligned%7D%0A%5Ctilde%20x_k%20%3D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%282m%29%7D%20%2B%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%2B1%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%282m%2B1%29%7D.%0A%5C%5C%20%3D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D%20%2B%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%7D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%2B1%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D.%0A%5Cend%7Baligned%7D"
+alt="\begin{aligned}
+\tilde x_k = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N} k(2m)} + \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N} k(2m+1)}.
+\\ = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}.
+\end{aligned}" title="\begin{aligned}
+\tilde x_k = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N} k(2m)} + \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N} k(2m+1)}.
+\\ = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}.
+\end{aligned}" class="math display" /></p>
+<p>Pour <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin"
+alt="k \in" title="k \in" class="math inline" /></p>
+<p>En factorisant, cela donne :</p>
+<p>Pour <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cin%20%5B%5C%21%5B0%2CN%2F2-1%5D%5C%21%5D"
+alt="k \in [\![0,N/2-1]\!]" title="k \in [\![0,N/2-1]\!]"
+class="math inline" />,</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Bcases%7D%20%5Ctilde%20x_k%20%3D%20%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D%20%2B%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%7D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%2B1%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D.%20%20%5C%5C%0A%5Ctilde%20x_%7B%5Cfrac%7BN%7D%7B2%7D%20%2B%20k%7D%20%3D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D%20%2B%20e%5E%7B-i%20%5Cpi%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%7D%20%5Csum_%7Bm%3D0%7D%5E%7BN%2F2-1%7D%20x_%7B2m%2B1%7D%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%2F2%7D%20km%7D%0A%5Cend%7Bcases%7D"
+alt="\begin{cases} \tilde x_k =  \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}.  \\
+\tilde x_{\frac{N}{2} + k} = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \pi} e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}
+\end{cases}"
+title="\begin{cases} \tilde x_k =  \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}.  \\
+\tilde x_{\frac{N}{2} + k} = \sum_{m=0}^{N/2-1} x_{2m} e^{-i \frac{2\pi}{N/2} km} + e^{-i \pi} e^{-i \frac{2\pi}{N} k} \sum_{m=0}^{N/2-1} x_{2m+1} e^{-i \frac{2\pi}{N/2} km}
+\end{cases}" class="math display" /></p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5CRightarrow%20%5Cbegin%7Bcases%7D%20%5Ctilde%20x_k%20%3D%20%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bpair%7D%7D%20%2B%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%7D%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bimpair%7D%7D%20%20%5C%5C%0A%5Ctilde%20x_%7B%5Cfrac%7BN%7D%7B2%7D%20%2B%20k%7D%20%3D%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bpair%7D%7D%20-%20e%5E%7B-i%20%5Cfrac%7B2%5Cpi%7D%7BN%7D%20k%7D%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bimpair%7D%7D%0A%5Cend%7Bcases%7D"
+alt="\Rightarrow \begin{cases} \tilde x_k =  \tilde x_k^{\text{pair}} + e^{-i \frac{2\pi}{N} k} \tilde x_k^{\text{impair}}  \\
+\tilde x_{\frac{N}{2} + k} = \tilde x_k^{\text{pair}} - e^{-i \frac{2\pi}{N} k} \tilde x_k^{\text{impair}}
+\end{cases}"
+title="\Rightarrow \begin{cases} \tilde x_k =  \tilde x_k^{\text{pair}} + e^{-i \frac{2\pi}{N} k} \tilde x_k^{\text{impair}}  \\
+\tilde x_{\frac{N}{2} + k} = \tilde x_k^{\text{pair}} - e^{-i \frac{2\pi}{N} k} \tilde x_k^{\text{impair}}
+\end{cases}" class="math display" /></p>
+<p>où <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bpair%7D%7D"
+alt="\tilde x_k^{\text{pair}}" title="\tilde x_k^{\text{pair}}"
+class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k%5E%7B%5Ctext%7Bimpair%7D%7D"
+alt="\tilde x_k^{\text{impair}}" title="\tilde x_k^{\text{impair}}"
+class="math inline" /> sont les TFDs des sous-séquences de taille <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%2F2"
+alt="N/2" title="N/2" class="math inline" />.</p>
+<p>Le processus se poursuit en décomposant chaque sous-séquence jusqu’à
+obtenir des séquences de taille 1, pour lesquelles la TFD est la valeur
+du coefficient. Si nous notons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20T%28N%29"
+alt="T(N)" title="T(N)" class="math inline" /> la complexité du calcul
+de la TFD sur une liste de taille <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> par l’algorithme de Cooley-Tuckey, nous
+avons :</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Bcases%7D%0A%20%20%20%20T%28N%29%20%3D%202T%28%5Cfrac%7BN%7D%7B2%7D%29%20%2B%20N%20%5C%5C%0A%20%20%20%20T%281%29%20%3D%200%0A%5Cend%7Bcases%7D"
+alt="\begin{cases}
+    T(N) = 2T(\frac{N}{2}) + N \\
+    T(1) = 0
+\end{cases}" title="\begin{cases}
+    T(N) = 2T(\frac{N}{2}) + N \\
+    T(1) = 0
+\end{cases}" class="math display" /></p>
+<p>Le premier terme correspond au calcul des DFT des deux
+sous-séquences. Le deuxième terme de la somme correspond au calcul des
+<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Ctilde%20x_k"
+alt="\tilde x_k" title="\tilde x_k" class="math inline" /> en fonction
+de ces dernières valeurs.</p>
+<p>En posant <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20p%20%3D%20%5Clog_2%20N"
+alt="p = \log_2 N" title="p = \log_2 N" class="math inline" /> et <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20S%28p%29%20%3D%20T%28N%3D2%5Ep%29"
+alt="S(p) = T(N=2^p)" title="S(p) = T(N=2^p)" class="math inline" />,
+l’équation de complexité devient :</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cbegin%7Bcases%7D%0AS%28p%29%20%3D%202%20S%28p-1%29%20%2B%202%5Ep%20%5C%5C%0AS%280%29%20%3D%200%0A%5Cend%7Bcases%7D"
+alt="\begin{cases}
+S(p) = 2 S(p-1) + 2^p \\
+S(0) = 0
+\end{cases}" title="\begin{cases}
+S(p) = 2 S(p-1) + 2^p \\
+S(0) = 0
+\end{cases}" class="math display" /></p>
+<p>Une récurrence immédiate donne :</p>
+<p><img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20S%28p%29%20%3D%20p%202%5Ep%20%5CRightarrow%20T%28N%29%20%3D%20S%28%5Clog_2%20N%29%20%3D%20%20N%20%5Clog_2%20N"
+alt="S(p) = p 2^p \Rightarrow T(N) = S(\log_2 N) =  N \log_2 N"
+title="S(p) = p 2^p \Rightarrow T(N) = S(\log_2 N) =  N \log_2 N"
+class="math display" />.</p>
+<p>Cela est meilleur que la complexité naïve (de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%5E2"
+alt="N^2" title="N^2" class="math inline" />).</p>
+<h2 id="application-produit-de-convolution-rapide">Application : produit
+de convolution rapide</h2>
+<p>Soient <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%5Cin%20%5Cmathbb%7BC%7D%5Ep"
+alt="x \in \mathbb{C}^p" title="x \in \mathbb{C}^p"
+class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y%20%5Cin%20%5Cmathbb%7BC%7D%5Eq"
+alt="y \in \mathbb{C}^q" title="y \in \mathbb{C}^q"
+class="math inline" /> deux vecteurs. Nous souhaitons calculer la
+convolution (discrète) <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x%20%5Cast%20y%20%3D%20%28%5Csum_%7Bk%3D0%7D%5E%7Bp-1%7D%20x_k%20y_%7Bm-k%7D%29_%7B0%20%5Cleq%20m%20%3C%20p%20%2B%20q%7D"
+alt="x \ast y = (\sum_{k=0}^{p-1} x_k y_{m-k})_{0 \leq m &lt; p + q}"
+title="x \ast y = (\sum_{k=0}^{p-1} x_k y_{m-k})_{0 \leq m &lt; p + q}"
+class="math display" /> (où <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x_k%20%3D%200"
+alt="x_k = 0" title="x_k = 0" class="math inline" /> lorsque <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cnotin%20%5B%5C%21%5B0%2Cp-1%5D%5C%21%5D"
+alt="k \notin [\![0,p-1]\!]" title="k \notin [\![0,p-1]\!]"
+class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y_k%20%3D%200"
+alt="y_k = 0" title="y_k = 0" class="math inline" /> lorsque <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%20%5Cnotin%20%5B%5C%21%5B0%2Cq-1%5D%5C%21%5D"
+alt="k \notin [\![0,q-1]\!]" title="k \notin [\![0,q-1]\!]"
+class="math inline" /> .</p>
+<p>Le calcul naïf nécessite de l’ordre de <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BO%7D%28pq%29"
+alt="\mathcal{O}(pq)" title="\mathcal{O}(pq)" class="math inline" />
+opérations élémentaires.</p>
+<p>Le théorème deconvolution nous permet de réduire facilement la
+complexité cu calcul de <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%20%5Cast%20y"
+alt="x \ast y" title="x \ast y" class="math inline" /> : remarquons
+qu’un produit de convolution classique est une convolution circulaire si
+l’on étend suffisemment le support des vecteurs.</p>
+<p>Posons <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N%3Dp%2Bq-1"
+alt="N=p+q-1" title="N=p+q-1" class="math inline" /> et notons
+respectivement <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%5E%7B%28N%29%7D"
+alt="x^{(N)}" title="x^{(N)}" class="math inline" /> et <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y%5E%7B%28N%29%7D"
+alt="y^{(N)}" title="y^{(N)}" class="math inline" /> les vecteurs
+étendus de <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x" alt="x"
+title="x" class="math inline" /> et <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y" alt="y"
+title="y" class="math inline" /> avec <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20N" alt="N"
+title="N" class="math inline" /> éléments (avec <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20x%5E%7B%28N%29%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20x%20~%200%20%5Ccdots%200%0A%5Cend%7Bbmatrix%7D"
+alt="x^{(N)} = \begin{bmatrix}
+    x ~ 0 \cdots 0
+\end{bmatrix}" title="x^{(N)} = \begin{bmatrix}
+    x ~ 0 \cdots 0
+\end{bmatrix}" class="math inline" /> et <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20y%5E%7B%28N%29%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20y%20~%20%200%20%5Ccdots%200%0A%5Cend%7Bbmatrix%7D"
+alt="y^{(N)} = \begin{bmatrix}
+    y ~  0 \cdots 0
+\end{bmatrix}" title="y^{(N)} = \begin{bmatrix}
+    y ~  0 \cdots 0
+\end{bmatrix}" class="math inline" />). <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x%20%5Cast%20y%20%3D%20x%5E%7B%28N%29%7D%20%5Ccircledast%20y%5E%7B%28N%29%7D%20%3D%20%5Cmathcal%7BF%7D%5E%7B-1%7D%5C%7B%5Cmathcal%7BF%7D%28x%5E%7B%28N%29%7D%5C%7D%20%5Codot%20%5Cmathcal%7BF%7D%5C%7By%5E%7B%28N%29%7D%29%5C%7D"
+alt="x \ast y = x^{(N)} \circledast y^{(N)} = \mathcal{F}^{-1}\{\mathcal{F}(x^{(N)}\} \odot \mathcal{F}\{y^{(N)})\}"
+title="x \ast y = x^{(N)} \circledast y^{(N)} = \mathcal{F}^{-1}\{\mathcal{F}(x^{(N)}\} \odot \mathcal{F}\{y^{(N)})\}"
+class="math display" /></p>
+<p>Cette méthodes nécessite les opérations suivantes:</p>
+<ul>
+<li><p>Calcul des deux transformées de Fourier (<img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BO%7D%28N%20%5Clog_2%20%28N%29"
+alt="\mathcal{O}(N \log_2 (N)" title="\mathcal{O}(N \log_2 (N)"
+class="math inline" />))</p></li>
+<li><p>Produit de Hadamard (<img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BO%7D%28N%29"
+alt="\mathcal{O}(N)" title="\mathcal{O}(N)"
+class="math inline" />)</p></li>
+<li><p>Transformée de Fourier inverse (<img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BO%7D%28N%20%5Clog_2%20N%29"
+alt="\mathcal{O}(N \log_2 N)" title="\mathcal{O}(N \log_2 N)"
+class="math inline" />)</p></li>
+</ul>
+<p>La complexité de cette nouvelle méthode est en <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BO%7D%28%28p%2Bq%29%20%5Clog_2%20%28p%2Bq%29%20%29%20%5Cll%20%5Cmathcal%7BO%7D%28pq%29"
+alt="\mathcal{O}((p+q) \log_2 (p+q) ) \ll \mathcal{O}(pq)"
+title="\mathcal{O}((p+q) \log_2 (p+q) ) \ll \mathcal{O}(pq)"
+class="math inline" />, elle accélère significativement le calcul de la
+convolution.</p>
+<p>En python, la fonction <code>scipy.signal.convolve</code> du package
+<code>scipy</code> utilise l’astuce que nous venons d’exposer pour
+calculer de la convolution entre deux tableaux.</p>
+<p>Les calculs de produits polynômes relevant également du calcul de
+convolution, ou les produits d’entiers peuvent également grandement être
+améliorés avec cette méthode.</p>
+<h1 id="memo">Memo</h1>
+<div class="tcolorbox">
+<ul>
+<li><p><strong>Définition :</strong> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%28x%29_k%20%3D%20%5Ctilde%20x_k%20%3D%20%5Csum_%7Bn%3D0%7D%5E%7BN-1%7D%20x_n%20e%5E%7B-i%5Cfrac%7B2%20%5Cpi%20k%20n%7D%7BN%7D%7D"
+alt="\mathcal{F}(x)_k = \tilde x_k = \sum_{n=0}^{N-1} x_n e^{-i\frac{2 \pi k n}{N}}"
+title="\mathcal{F}(x)_k = \tilde x_k = \sum_{n=0}^{N-1} x_n e^{-i\frac{2 \pi k n}{N}}"
+class="math display" /> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5E%7B-1%7D%28%5Ctilde%20x%29_n%20%3D%20x_n%20%3D%20%5Csum_%7Bk%3D0%7D%5E%7BN-1%7D%20x_k%20e%5E%7Bi%5Cfrac%7B2%20%5Cpi%20n%20k%7D%7BN%7D%7D"
+alt="\mathcal{F}^{-1}(\tilde x)_n = x_n = \sum_{k=0}^{N-1} x_k e^{i\frac{2 \pi n k}{N}}"
+title="\mathcal{F}^{-1}(\tilde x)_n = x_n = \sum_{k=0}^{N-1} x_k e^{i\frac{2 \pi n k}{N}}"
+class="math display" /></p></li>
+<li><p><strong>Linéarité :</strong> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Ba%20x%20%2B%20b%20y%5C%7D%20%3D%20a%20%5Ctilde%7Bx%7D%20%2B%20b%20%5Ctilde%7By%7D"
+alt="\mathcal{F}\{a x + b y\} = a \tilde{x} + b \tilde{y}"
+title="\mathcal{F}\{a x + b y\} = a \tilde{x} + b \tilde{y}"
+class="math display" /> où <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20a%2C%20b%20%5Cin%20%5Cmathbb%7BC%7D"
+alt="a, b \in \mathbb{C}" title="a, b \in \mathbb{C}"
+class="math inline" />.</p></li>
+<li><p><strong>Symétrie hermitienne :</strong> <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20x%20%5Cin%20%5Cmathbb%7BR%7D%20%5CRightarrow%20%5Ctilde%7Bx%7D_%7B-k%7D%20%3D%20%5Ctilde%7Bx%7D_k%5E%2A%20%5Cquad%20%5Cforall%20k%20%5Cin%20%5B%5C%21%5B0%2CN-1%5D%5C%21%5D"
+alt="x \in \mathbb{R} \Rightarrow \tilde{x}_{-k} = \tilde{x}_k^* \quad \forall k \in [\![0,N-1]\!]"
+title="x \in \mathbb{R} \Rightarrow \tilde{x}_{-k} = \tilde{x}_k^* \quad \forall k \in [\![0,N-1]\!]"
+class="math display" /></p></li>
+<li><p><strong>Décalage dans le temps :</strong> <img
+style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20y_n%20%3D%20x_%7Bn-m%7D%20%5CRightarrow%20%5Cmathcal%7BF%7D%5C%7By%5C%7D_k%20%3D%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_k%20e%5E%7B-j%20%5Cfrac%7B2%5Cpi%20k%20m%7D%7BN%7D%7D"
+alt="y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}"
+title="y_n = x_{n-m} \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_k e^{-j \frac{2\pi k m}{N}}"
+class="math display" /></p></li>
+<li><p><strong>Modulation :</strong> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20y_n%20%3D%20e%5E%7Bj%20%5Cfrac%7B2%5Cpi%20n%20m%7D%7BN%7D%7D%20x_n%20%5CRightarrow%20%5Cmathcal%7BF%7D%5C%7By%5C%7D_k%20%3D%20%5Cmathcal%7BF%7D%5C%7Bx%5C%7D_%7Bk-m%7D"
+alt="y_n = e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_{k-m}"
+title="y_n = e^{j \frac{2\pi n m}{N}} x_n \Rightarrow \mathcal{F}\{y\}_k = \mathcal{F}\{x\}_{k-m}"
+class="math display" /></p></li>
+<li><p><strong>Convolution :</strong> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Bx%20%5Ccircledast%20y%20%5C%7D%20%3D%20%5Cmathcal%7BF%7D%20%5C%7Bx%5C%7D%20%5Codot%20%5Cmathcal%7BF%7D%20%5C%7By%5C%7D"
+alt="\mathcal{F}\{x \circledast y \} = \mathcal{F} \{x\} \odot \mathcal{F} \{y\}"
+title="\mathcal{F}\{x \circledast y \} = \mathcal{F} \{x\} \odot \mathcal{F} \{y\}"
+class="math display" /> <img style="vertical-align:middle"
+src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20%5Cmathcal%7BF%7D%5C%7Bx%20%5Codot%20y%20%5C%7D%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20%5Cmathcal%7BF%7D%20%5C%7Bx%5C%7D%20%5Ccircledast%20%5Cmathcal%7BF%7D%20%5C%7By%5C%7D"
+alt="\mathcal{F}\{x \odot y \} = \frac{1}{N} \mathcal{F} \{x\} \circledast \mathcal{F} \{y\}"
+title="\mathcal{F}\{x \odot y \} = \frac{1}{N} \mathcal{F} \{x\} \circledast \mathcal{F} \{y\}"
+class="math display" /></p></li>
+</ul>
+</div>
+</body>
+</html>
